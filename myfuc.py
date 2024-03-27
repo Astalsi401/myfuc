@@ -234,7 +234,9 @@ class HtmlContent:
         self.css = f'<style>{css}</style>' if css else ''
         self.js = ''.join([f'''<script {f'type="{script.type}"' if script.type else ''}>{script.script}</script>''' for script in js]) if js else ''
         self.simp = unescape(f'{self.css}{self.body()}{self.js}')
-        self.title = self.soup.title.string
 
     def body(self):
         return re.sub(r'<body>|</body>', '', str(self.soup.select('body')[0]))
+    
+    def title(self):
+        return self.soup.title.string
